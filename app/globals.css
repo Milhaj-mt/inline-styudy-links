@@ -1,26 +1,164 @@
 @import "tailwindcss";
 
+/* ==========================================================================
+   INLINE STUDY LINKS - GLOBAL DESIGN & COLOR SYSTEM
+   
+   🎨 ALL WEBSITE COLORS ARE CONFIGURED HERE IN ONE PLACE!
+   Matches the official Inline Study Links logo:
+   - Clean white background (inside the logo circle)
+   - Signature Inline Ocean Blue (#3274b5)
+   - Warm Orange & Vibrant Magenta ring accents (#ff7a00 -> #d946ef)
+   ========================================================================== */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* --- 1. Signature Brand Blues (Inline Logo Color) --- */
+  --color-primary: #3274b5;             /* Official Inline Ocean Blue */
+  --color-primary-hover: #256098;       /* Deeper blue hover state */
+  --color-primary-secondary: #0284c7;   /* Secondary bright azure blue */
+  --color-primary-secondary-hover: #0369a1;
+  --color-primary-glow: rgba(50, 116, 181, 0.2);
+
+  /* --- 2. Ring Gradient Accents (Instagram/Social Ring from Logo) --- */
+  --color-ring-orange: #ff7a00;
+  --color-ring-pink: #ec4899;
+  --color-ring-magenta: #d946ef;
+  --gradient-ring: linear-gradient(135deg, #ff7a00 0%, #ff007a 50%, #d946ef 100%);
+
+  /* --- 3. Clean Light Theme Backgrounds --- */
+  --color-bg-page: #ffffff;             /* Crisp clean white matching logo disc */
+  --color-bg-page-subtle: #f8fafc;      /* Soft pearl slate */
+  --color-bg-page-tint: #f0f7ff;        /* Soft icy blue tint */
+  --color-bg-ambient-blue: rgba(50, 116, 181, 0.07);
+  --color-bg-ambient-warm: rgba(255, 122, 0, 0.05);
+
+  /* --- 4. Light Glassmorphism & Pill Surfaces --- */
+  --color-nav-bg: rgba(255, 255, 255, 0.88);   /* Frosted white pill navbar */
+  --color-nav-border: rgba(50, 116, 181, 0.15); /* Soft blue stroke */
+  --color-nav-active-pill: rgba(50, 116, 181, 0.1); /* Active "Home" pill */
+  --color-badge-bg: rgba(50, 116, 181, 0.06);   /* Top pill badge */
+  --color-badge-border: rgba(50, 116, 181, 0.18);
+  --color-card-bg: #ffffff;
+  --color-card-border: rgba(50, 116, 181, 0.12);
+  --color-card-border-hover: rgba(50, 116, 181, 0.4);
+
+  /* --- 5. Typography Colors (Deep Navy / Slate) --- */
+  --color-text-primary: #102a43;        /* Deep midnight navy for high contrast readability */
+  --color-text-brand: #3274b5;          /* Logo brand blue for key highlights */
+  --color-text-secondary: #475569;      /* Slate-600 for subtext and descriptions */
+  --color-text-muted: #64748b;          /* Slate-500 for captions */
+  --color-nav-text: #334155;            /* Slate-700 for nav links */
+  --color-nav-text-hover: #3274b5;      /* Brand blue on hover */
+
+  /* --- 6. Status, Badges & Accents --- */
+  --color-award-red: #e11d48;           /* World Education Summit emblem */
+  --color-status-green: #16a34a;        /* Green active indicator */
+  --color-status-green-glow: rgba(22, 163, 74, 0.25);
+  --color-whatsapp: #25d366;            /* WhatsApp green */
+  --color-whatsapp-hover: #20ba59;
 }
 
+/* Connect CSS variables to Tailwind CSS v4 */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: var(--color-primary);
+  --color-primary-hover: var(--color-primary-hover);
+  --color-primary-secondary: var(--color-primary-secondary);
+  --color-primary-secondary-hover: var(--color-primary-secondary-hover);
+  --color-bg-page: var(--color-bg-page);
+  --color-text-primary: var(--color-text-primary);
+  --color-text-brand: var(--color-text-brand);
+  --color-text-secondary: var(--color-text-secondary);
+  --color-text-muted: var(--color-text-muted);
+  --color-award: var(--color-award-red);
+  --color-status: var(--color-status-green);
+  --color-whatsapp: var(--color-whatsapp);
+  --font-sans: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Base Body Styles */
+html {
+  scroll-behavior: smooth;
+  color-scheme: light;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-bg-page);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* Custom Light Glass & Frosted Blur Utilities */
+.glass-nav {
+  background: var(--color-nav-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--color-nav-border);
+  box-shadow: 0 10px 30px -10px rgba(50, 116, 181, 0.08);
+}
+
+.glass-badge {
+  background: var(--color-badge-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-badge-border);
+}
+
+.glass-card {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+  box-shadow: 0 8px 25px -5px rgba(50, 116, 181, 0.08);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  border-color: var(--color-card-border-hover);
+  box-shadow: 0 15px 35px -5px rgba(50, 116, 181, 0.15);
+  transform: translateY(-4px);
+}
+
+/* Smooth Ambient Hero Glow for Light Theme */
+.hero-glow-bg {
+  background-color: var(--color-bg-page);
+  background-image: 
+    radial-gradient(ellipse 65% 45% at 50% 25%, var(--color-bg-ambient-blue) 0%, transparent 70%),
+    radial-gradient(circle at 12% 15%, var(--color-bg-ambient-warm) 0%, transparent 45%),
+    radial-gradient(circle at 88% 20%, rgba(217, 70, 239, 0.04) 0%, transparent 45%);
+}
+
+/* Button & Pill Utilities */
+.btn-pill-primary {
+  background-color: var(--color-primary);
+  color: #ffffff;
+  border-radius: 9999px;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 10px 25px -5px rgba(50, 116, 181, 0.35);
+}
+
+.btn-pill-primary:hover {
+  background-color: var(--color-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px -5px rgba(50, 116, 181, 0.45);
+}
+
+.btn-pill-secondary {
+  background-color: var(--color-primary-secondary);
+  color: #ffffff;
+  border-radius: 9999px;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 10px 20px -5px rgba(2, 132, 199, 0.28);
+}
+
+.btn-pill-secondary:hover {
+  background-color: var(--color-primary-secondary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 14px 24px -5px rgba(2, 132, 199, 0.38);
+}
+
+/* Gradient ring outline utility */
+.gradient-ring-border {
+  border: 2px solid transparent;
+  background-image: linear-gradient(white, white), var(--gradient-ring);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
 }
